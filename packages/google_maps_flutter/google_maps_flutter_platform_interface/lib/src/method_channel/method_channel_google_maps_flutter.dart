@@ -13,6 +13,8 @@ import 'package:flutter/gestures.dart';
 import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 import 'package:stream_transform/stream_transform.dart';
 
+import '../../google_maps_flutter_platform_interface.dart';
+
 /// An implementation of [GoogleMapsFlutterPlatform] that uses [MethodChannel] to communicate with the native code.
 ///
 /// The `google_maps_flutter` plugin code itself never talks to the native code directly. It delegates
@@ -272,6 +274,24 @@ class MethodChannelGoogleMapsFlutter extends GoogleMapsFlutterPlatform {
     return channel(mapId).invokeMethod<void>(
       'circles#update',
       circleUpdates.toJson(),
+    );
+  }
+
+	 /// Updates heatmap configuration.
+  ///
+  /// Change listeners are notified once the update has been made on the
+  /// platform side.
+  ///
+  /// The returned [Future] completes after listeners have been notified.
+  @override
+  Future<void> updateHeatmaps(
+    HeatmapUpdates heatmapUpdates, {
+    @required int mapId,
+  }) {
+    assert(heatmapUpdates != null);
+    return channel(mapId).invokeMethod<void>(
+      'heatmaps#update',
+      heatmapUpdates.toJson(),
     );
   }
 

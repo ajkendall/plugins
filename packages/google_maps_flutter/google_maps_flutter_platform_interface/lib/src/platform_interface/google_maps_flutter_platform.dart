@@ -15,6 +15,8 @@ import 'package:google_maps_flutter_platform_interface/src/method_channel/method
 import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+import '../../google_maps_flutter_platform_interface.dart';
+
 /// The interface that platform-specific implementations of `google_maps_flutter` must extend.
 ///
 /// Avoid `implements` of this interface. Using `implements` makes adding any new
@@ -110,6 +112,19 @@ abstract class GoogleMapsFlutterPlatform extends PlatformInterface {
   /// The returned [Future] completes after listeners have been notified.
   Future<void> updateCircles(
     CircleUpdates circleUpdates, {
+    @required int mapId,
+  }) {
+    throw UnimplementedError('updateCircles() has not been implemented.');
+  }
+
+	 /// Updates heatmap configuration.
+  ///
+  /// Change listeners are notified once the update has been made on the
+  /// platform side.
+  ///
+  /// The returned [Future] completes after listeners have been notified.
+  Future<void> updateHeatmaps(
+    HeatmapUpdates heatmapUpdates, {
     @required int mapId,
   }) {
     throw UnimplementedError('updateCircles() has not been implemented.');
